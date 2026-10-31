@@ -601,3 +601,19 @@ h3{line-height:1.05}
 .stat .num{font-size:clamp(72px,9vw,128px);line-height:.95;letter-spacing:0;font-variant-numeric:lining-nums;margin:0}
 .stat p:last-child{font-size:clamp(16px,1.3vw,19px);line-height:1.4;max-width:none;text-wrap:balance;color:#F0DDEE}
 @media(max-width:760px){.stats{grid-template-columns:1fr;gap:28px;padding-block:48px}.stat .num{font-size:72px}.stat p:last-child{font-size:16px}}
+
+/* menu page, phones: even rhythm between tabs, search, section chips and categories */
+@media(max-width:760px){
+  .page-head{padding-bottom:36px}
+  .tools .tabs{margin-bottom:16px}
+  .search{margin-bottom:0}
+  .chips{flex-wrap:wrap;overflow:visible;gap:8px;margin:20px 0 32px;padding:0}
+  .chips a{flex:1 1 calc(50% - 8px);justify-content:center;min-height:48px}
+  .menu-group{margin-bottom:56px;scroll-margin-top:96px}
+  .menu-group>h2{margin-bottom:.45em}
+  .cats{gap:10px}
+  .cat>summary{padding:18px 20px;min-height:64px}
+  .cat ul{padding:4px 20px 18px}
+  .cat li{padding:.7em 0}
+  .note{margin-top:8px}
+}
