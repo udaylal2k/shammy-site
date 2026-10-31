@@ -117,6 +117,29 @@ document.documentElement.classList.add('js');
     });
   }
 
+  /* known-for list: the photograph follows the row you hover, focus or scroll to */
+  var kRows = [].slice.call(document.querySelectorAll('.k-list li')), kPics = document.querySelectorAll('.k-pic');
+  if (kRows.length) {
+    var kSet = function (i) {
+      kRows.forEach(function (r, n) { r.classList.toggle('on', n === i); });
+      kPics.forEach(function (c, n) { c.classList.toggle('on', n === i); });
+    };
+    kRows.forEach(function (r, i) {
+      r.addEventListener('mouseenter', function () { kSet(i); });
+      r.addEventListener('focusin', function () { kSet(i); });
+    });
+    var kWide = matchMedia('(min-width:901px)'), kTick = false;
+    addEventListener('scroll', function () {
+      if (kTick || !kWide.matches) return; kTick = true;
+      requestAnimationFrame(function () {
+        kTick = false;
+        var mid = innerHeight * 0.45, best = -1, dist = 1e9;
+        kRows.forEach(function (r, i) { var b = r.getBoundingClientRect(), d = Math.abs(b.top + b.height / 2 - mid); if (d < dist) { dist = d; best = i; } });
+        if (best > -1) kSet(best);
+      });
+    }, { passive: true });
+  }
+
   /* menu tabs: Women / Men */
   var tabs = document.querySelectorAll('.tabs a');
   if (tabs.length) {
