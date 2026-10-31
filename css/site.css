@@ -35,7 +35,6 @@ section{padding-block:var(--gap)}
 .bar nav a:hover{text-decoration:underline;text-underline-offset:6px}
 .bar .cta{background:var(--gold);color:var(--ink);padding:10px 20px;font-weight:500}
 .bar .cta:hover{text-decoration:none;background:var(--cream)}
-@media(max-width:760px){.bar nav a:not(.cta){display:none}}
 
 /* buttons */
 .btn{display:inline-block;padding:16px 30px;background:var(--gold);color:var(--ink);font:500 16px/1 var(--text);text-decoration:none;border:0;cursor:pointer;transition:transform .25s var(--ease),background .25s}
@@ -208,7 +207,7 @@ h1,h2,h3,.brand,.marquee span,.stat .num,.brands p.big,.cred,.note p,footer .nam
 .marquee:hover .track{animation-play-state:paused}
 
 /* stats */
-.stats{background:var(--plum);color:var(--cream);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,70px);padding-block:clamp(64px,8vw,120px)}
+.stats{background:var(--plum-deep);color:var(--cream);display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px,4vw,70px);padding-block:clamp(64px,8vw,120px)}
 .stat .num{font:400 clamp(72px,11vw,176px)/.9 var(--display);margin:0 0 .15em;color:var(--gold);letter-spacing:-.02em}
 .stat p:last-child{font-size:clamp(17px,1.4vw,21px);max-width:14em;margin:0}
 @media(max-width:760px){.stats{grid-template-columns:1fr}}
@@ -279,19 +278,6 @@ h1,h2,h3,.brand,.marquee span,.stat .num,.brands p.big,.cred,.note p,footer .nam
 .bar.solid .brand .l-dark{display:block}
 .nav-toggle{display:none;background:none;border:0;color:inherit;font:500 16px var(--text);padding:10px 0;cursor:pointer}
 .bar nav a[aria-current="page"]{text-decoration:underline;text-underline-offset:6px}
-@media(max-width:900px){
-  .nav-toggle{display:block;margin-left:auto;margin-right:18px}
-  .bar nav{display:none}
-  .bar.open{background:var(--plum-deep);color:var(--cream)}
-  .bar.open .brand .l-light{display:block}.bar.open .brand .l-dark{display:none}
-  .bar.open nav{display:flex;position:fixed;inset:0;z-index:-1;background:var(--plum-deep);flex-direction:column;justify-content:center;align-items:flex-start;gap:6px;padding:90px var(--margin) var(--margin)}
-  .bar.open nav a{font:500 clamp(34px,10vw,56px)/1.15 var(--display)}
-  .bar.open nav a.cta{font:500 18px var(--text);margin-top:20px;color:var(--ink)}
-  .bar nav a:not(.cta){display:inline!important}
-  .bar nav .cta{display:none}
-  .bar.open nav .cta{display:inline-block}
-  .bar .cta.always{display:inline-block}
-}
 .bar.open nav a:not(.cta)::after{display:none}
 .crumbs{font-size:15px;margin:0 0 clamp(18px,2.4vw,32px);color:#F3E4F1}
 .crumbs a{text-underline-offset:4px}
@@ -309,3 +295,162 @@ h1,h2,h3,.brand,.marquee span,.stat .num,.brands p.big,.cred,.note p,footer .nam
 .related a:hover{transform:translateX(14px)}
 footer .flogo{display:block;width:min(100%,1000px);height:auto;margin:0 0 clamp(32px,4vw,64px)}
 section[id],div[id]{scroll-margin-top:90px}
+
+
+/* =====================================================================
+   v3: phone-first layer (iOS/Android safe areas, tap size, sticky dock)
+   ===================================================================== */
+:root{--bar-h:68px;--safe-b:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:84px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.m-only{display:none}
+.zoom{display:block;cursor:zoom-in}
+.wipe picture,.intro picture,.sig picture,.panel picture{display:contents}
+.intro .wipe img{aspect-ratio:4/5;object-fit:cover;width:100%}
+.sig .top .wipe img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.mosaic .wipe,.mosaic .zoom{height:100%}
+
+/* quote band: whole field of brand yellow, one huge sentence */
+.quote{background:var(--gold);color:var(--plum-deep)}
+.quote blockquote{margin:0;max-width:20em}
+.quote p{font:400 clamp(34px,5.6vw,92px)/1.08 var(--display);letter-spacing:-.015em;margin:0;font-variation-settings:"opsz" 22}
+.quote p.by{font:500 clamp(16px,1.4vw,20px)/1.4 var(--text);letter-spacing:0;margin-top:1.6em}
+
+/* map band */
+.visit{position:relative;background:var(--mist);padding:0}
+.visit iframe{display:block;width:100%;height:clamp(340px,52vw,560px);border:0;filter:saturate(.85)}
+.visit .btn{position:absolute;left:var(--m);bottom:clamp(16px,2.4vw,32px)}
+
+/* menu page: sticky tools, section chips, collapsible categories */
+.tools{position:sticky;top:var(--bar-offset,0px);z-index:30;display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--cream);margin:0 calc(var(--m) * -1) clamp(20px,3vw,40px);padding:12px var(--m);transition:top .45s var(--ease)}
+.tools .tabs{margin:0;flex:0 0 auto;flex-wrap:nowrap}
+.tools .tabs a{padding:14px 26px;min-height:48px;display:inline-flex;align-items:center}
+.search{flex:1 1 220px;min-width:0}
+.search input{width:100%;min-height:48px;padding:12px 16px;border:2px solid var(--plum);background:#fff;color:var(--ink);font:400 16px var(--text);border-radius:0;-webkit-appearance:none;appearance:none}
+.search input:focus{outline:3px solid var(--gold);outline-offset:0}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 calc(var(--m) * -1) clamp(28px,4vw,56px);padding:0 var(--m);-webkit-overflow-scrolling:touch}
+.chips::-webkit-scrollbar{display:none}
+.chips a{flex:0 0 auto;padding:10px 18px;min-height:44px;display:inline-flex;align-items:center;border:2px solid var(--plum);color:var(--plum);text-decoration:none;font:500 15px var(--text)}
+.chips a:hover{background:var(--plum);color:var(--cream)}
+.q-empty{font:400 clamp(22px,3vw,34px)/1.2 var(--display);color:var(--plum)}
+.q-empty a{color:var(--plum)}
+.cat>summary{list-style:none;cursor:default}
+.cat>summary::-webkit-details-marker{display:none}
+.cat>summary h3{margin:0}
+.cat[open]>summary h3{margin-bottom:.6em}
+.cat li.off,.cat.off{display:none}
+.menu-group{scroll-margin-top:150px}
+
+/* lightbox */
+dialog.lb{border:0;padding:0;background:transparent;max-width:100vw;max-height:100dvh;width:100%;height:100%}
+dialog.lb::backdrop{background:rgba(42,16,40,.94)}
+dialog.lb img{position:absolute;inset:0;margin:auto;max-width:94vw;max-height:88dvh;width:auto;height:auto;object-fit:contain}
+dialog.lb button{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;min-width:48px;min-height:48px;border:0;background:var(--gold);color:var(--ink);font:500 16px var(--text);padding:0 20px;cursor:pointer}
+
+/* sticky dock (phones only) */
+.dock{display:none}
+@media(max-width:900px){
+  body{padding-bottom:calc(76px + var(--safe-b))}
+  .dock{display:grid;grid-template-columns:1fr 2fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--plum-deep);padding:10px 12px calc(10px + var(--safe-b));gap:8px;transition:transform .45s var(--ease)}
+  .dock a{display:flex;align-items:center;justify-content:center;min-height:52px;color:var(--cream);text-decoration:none;font:500 16px var(--text);border:2px solid rgba(252,249,239,.35)}
+  .dock a.wa{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  body.nav-open .dock{transform:translateY(110%)}
+  footer{padding-bottom:calc(34px + 24px)}
+}
+
+/* header + full-screen phone menu.  The fixed header uses transform, which would trap a
+   fixed child, so the open state drops the transform and the nav is laid out as an overlay. */
+@media(max-width:900px){
+  .bar{padding:12px var(--m);padding-top:max(12px,env(safe-area-inset-top))}
+  .bar .brand img{height:30px}
+  .nav-toggle{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;margin:0;border:2px solid currentColor;font:500 16px var(--text)}
+  .bar nav{display:none}
+  .bar.open{transform:none;background:var(--plum-deep);color:var(--cream)}
+  .bar.open .brand .l-light{display:block}.bar.open .brand .l-dark{display:none}
+  .bar.open nav{display:flex;position:fixed;left:0;right:0;top:0;height:100dvh;z-index:-1;background:var(--plum-deep);flex-direction:column;align-items:flex-start;justify-content:center;gap:2px;padding:84px var(--m) calc(32px + var(--safe-b));overflow-y:auto}
+  .bar.open nav a:not(.cta):not(.m-only){display:inline-flex;align-items:center;font:500 clamp(34px,9.4vw,52px)/1.2 var(--display);padding:6px 0;min-height:44px}
+  .bar.open nav a.cta{display:inline-flex;align-items:center;min-height:52px;margin:18px 0 8px;font:500 18px var(--text);padding:0 28px}
+  .bar.open nav a.m-only{display:inline-flex;align-items:center;font:400 18px var(--text);padding:8px 0;min-height:44px;text-decoration:underline;text-underline-offset:5px}
+  .bar nav a:not(.cta)::after{display:none}
+}
+@media(min-width:901px){.nav-toggle{display:none}}
+
+/* phone layout tuning */
+@media(max-width:760px){
+  body{font-size:17px}
+  section{padding-block:clamp(56px,14vw,88px)}
+  .hero .copy{padding-top:96px}
+  .hero .actions{flex-direction:column;align-items:stretch;gap:6px}
+  .hero .actions .btn{text-align:center;padding:19px 24px}
+  .hero .actions .btn.ghost{padding:14px}
+  .hero .pic{margin-top:6px}
+  .btn{min-height:52px;display:inline-flex;align-items:center;justify-content:center}
+  .stats{grid-template-columns:repeat(3,1fr);gap:12px;padding-block:44px}
+  .stat .num{font-size:clamp(38px,13vw,64px)}
+  .stat p:last-child{font-size:14px;line-height:1.35}
+  .panel{min-height:58svh}
+  .panel h2{font-size:clamp(52px,17vw,88px)}
+  .cred{font-size:22px}
+  .brands p.big{font-size:clamp(26px,7.4vw,40px)}
+  .quote p{font-size:clamp(30px,8.4vw,46px)}
+  /* gallery becomes a swipeable strip */
+  .mosaic{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;margin-inline:calc(var(--m) * -1);padding-inline:var(--m);scroll-padding-inline:var(--m);scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .mosaic::-webkit-scrollbar{display:none}
+  .mosaic .wipe{flex:0 0 82%;scroll-snap-align:start;aspect-ratio:4/5;grid-row:auto}
+  .mosaic .wipe img{height:100%;width:100%;object-fit:cover}
+  .mosaic .zoom{height:100%}
+  .gallery{padding-bottom:var(--gap)}
+  .form select,.form input{min-height:52px}
+  .form .row button{min-height:52px}
+  .book .logo{width:min(300px,78%)}
+  .details .btn-row a{display:block}
+  .visit .btn{left:12px;right:12px;bottom:12px}
+  .tools{gap:10px}
+  .tools .tabs{width:100%}
+  .tools .tabs a{flex:1;justify-content:center}
+  .search{flex:1 1 100%}
+  /* categories collapse into tappable rows */
+  .cats{gap:10px}
+  .cat{padding:0}
+  .cat>summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;padding:18px 20px;min-height:60px}
+  .cat>summary h3{font-size:24px;margin:0!important}
+  .cat>summary::after{content:"+";font:400 30px/1 var(--text);color:var(--plum)}
+  .cat[open]>summary::after{content:"\2212"}
+  .cat ul{padding:0 20px 18px}
+  .cat li{padding:.5em 0;border-top:1px solid rgba(120,0,114,.14)}
+  .cat:hover{transform:none}
+  .menu-group>h2{font-size:clamp(44px,13vw,64px)}
+  .menu-group{margin-bottom:56px}
+  .note{padding:26px}
+  .note .btn{width:100%}
+}
+@media(hover:none){.cat:hover,.cat li:hover,.panel:hover img,.panel:hover h2{transform:none}}
+@media(prefers-reduced-motion:reduce){.dock,.tools{transition:none}.mosaic{scroll-behavior:auto}}
+@media(min-width:761px){.cat>summary{pointer-events:none}}
+
+/* type polish: keep kerning on at display sizes (fixes the gap in "W" pairs) */
+h1,h2,h3,.brand,.marquee span,.stat .num,.brands p.big,.cred,.note p,.quote p{font-kerning:normal;font-feature-settings:"kern" 1,"liga" 1;text-rendering:optimizeLegibility}
+.panel h2,.brands p.big,.quote p{letter-spacing:-.02em}
+@media(max-width:760px){
+  .panel p{max-width:10.5em}
+  .sig li a{position:relative;padding-right:44px}
+  .sig li a::after{content:"\2192";position:absolute;right:var(--m);top:clamp(26px,3.5vw,50px);font:400 28px/1 var(--text);color:var(--plum)}
+  .sig li:nth-child(even) a{padding-inline:0 44px}
+  .sig li:nth-child(even) a::after{right:0}
+}
+
+/* phones: only the Women/Men switch stays pinned, search scrolls away to save screen */
+@media(max-width:760px){
+  .tools{display:contents}
+  .tools .tabs{position:sticky;top:var(--bar-offset,0px);z-index:30;background:var(--cream);margin:0 calc(var(--m) * -1) 12px;padding:10px var(--m);width:auto;transition:top .45s var(--ease)}
+  .search{margin-bottom:16px}
+}
+@media(max-width:900px){.bar.open{transition:none}}
+
+.k{margin-right:-.075em}
+
+/* gallery cells own their size; the photo fills them (fixes overlap with <picture>/<a> wrappers) */
+.mosaic .wipe{position:relative;min-height:0;overflow:hidden}
+.mosaic .zoom{position:absolute;inset:0;height:100%}
+.mosaic .zoom img{width:100%;height:100%;object-fit:cover}
+@media(min-width:761px){.mosaic .a{aspect-ratio:auto}}

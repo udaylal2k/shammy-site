@@ -11,6 +11,26 @@ document.documentElement.classList.add('js');
     }).join(' ');
   });
 
+  /* optical kerning: Bodoni's W/F/T/V/Y/P leave a hole before a lowercase letter, so pull it in */
+  var kernSel = 'h1,h2,h3,.brands p.big span,.quote p:not(.by),.marquee span,.cred li,.note p,.related a,.q-empty';
+  document.querySelectorAll(kernSel).forEach(function (root) {
+    var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [], n;
+    while ((n = tw.nextNode())) nodes.push(n);
+    nodes.forEach(function (node) {
+      var s = node.nodeValue;
+      if (!/(^|[\s(“"'‘])[WFTVYP][a-zéèö]/.test(s)) return;
+      var frag = document.createDocumentFragment(), re = /(^|[\s(“"'‘])([WFTVYP])(?=[a-zéèö])/g, last = 0, m;
+      while ((m = re.exec(s))) {
+        var at = m.index + m[1].length;
+        frag.appendChild(document.createTextNode(s.slice(last, at)));
+        var k = document.createElement('span'); k.className = 'k'; k.textContent = m[2]; frag.appendChild(k);
+        last = at + 1;
+      }
+      frag.appendChild(document.createTextNode(s.slice(last)));
+      node.parentNode.replaceChild(frag, node);
+    });
+  });
+
   /* header: solid after scroll, tucks away when scrolling down */
   var bar = document.querySelector('.bar'), lastY = 0;
   var onScroll = function () {
@@ -20,6 +40,8 @@ document.documentElement.classList.add('js');
       bar.classList.toggle('hide', y > 240 && y > lastY + 4);
       if (y < lastY - 4 || y < 240) bar.classList.remove('hide');
     }
+    var off = bar && !bar.classList.contains('hide') && y > 240 ? bar.offsetHeight : 0;
+    document.documentElement.style.setProperty('--bar-offset', off + 'px');
     lastY = y;
   };
   onScroll(); addEventListener('scroll', onScroll, { passive: true });
@@ -27,8 +49,9 @@ document.documentElement.classList.add('js');
   /* mobile menu */
   var tg = document.querySelector('.nav-toggle');
   if (tg && bar) {
-    tg.addEventListener('click', function () { var o = bar.classList.toggle('open'); tg.setAttribute('aria-expanded', o); tg.textContent = o ? 'Close' : 'Browse'; document.body.style.overflow = o ? 'hidden' : ''; });
-    bar.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { bar.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); tg.textContent = 'Browse'; document.body.style.overflow = ''; }); });
+    tg.addEventListener('click', function () { var o = bar.classList.toggle('open'); tg.setAttribute('aria-expanded', o); tg.textContent = o ? 'Close' : 'Browse'; document.body.style.overflow = o ? 'hidden' : ''; document.body.classList.toggle('nav-open', o); });
+    bar.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { bar.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); tg.textContent = 'Browse'; document.body.style.overflow = ''; document.body.classList.remove('nav-open'); }); });
+    addEventListener('keydown', function (e) { if (e.key === 'Escape' && bar.classList.contains('open')) tg.click(); });
   }
 
   /* reveal on enter */
@@ -118,5 +141,57 @@ document.documentElement.classList.add('js');
     };
     btns.forEach(function (b) { b.addEventListener('click', function () { who = b.dataset.for; btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); fill(); upd(); }); });
     sel.addEventListener('change', upd); name.addEventListener('input', upd); fill(); upd();
+  }
+
+  /* menu: on phones categories start collapsed (first one open) */
+  var cats = [].slice.call(document.querySelectorAll('details.cat'));
+  var phone = matchMedia('(max-width:760px)');
+  var setOpen = function () {
+    cats.forEach(function (d, i) {
+      if (!phone.matches) d.open = true;
+      else if (!d.dataset.init) { d.open = i === 0; d.dataset.init = 1; }
+    });
+  };
+  if (cats.length) { setOpen(); (phone.addEventListener ? phone.addEventListener('change', function () { cats.forEach(function (d) { delete d.dataset.init; }); setOpen(); }) : 0); }
+
+  /* menu: live search across both menus */
+  var q = document.getElementById('q');
+  if (q) {
+    var empty = document.getElementById('q-empty');
+    q.addEventListener('input', function () {
+      var v = q.value.trim().toLowerCase(), any = false;
+      document.querySelectorAll('.menu-panel').forEach(function (panel) {
+        var panelHit = false;
+        panel.querySelectorAll('details.cat').forEach(function (d) {
+          var catHit = d.querySelector('h3').textContent.toLowerCase().indexOf(v) > -1, hit = false;
+          d.querySelectorAll('li').forEach(function (li) {
+            var m = !v || catHit || li.textContent.toLowerCase().indexOf(v) > -1;
+            li.classList.toggle('off', !m); if (m) hit = true;
+          });
+          d.classList.toggle('off', !hit);
+          if (v && hit) d.open = true;
+          if (hit) panelHit = true;
+        });
+        panel.querySelectorAll('.menu-group').forEach(function (g) { g.style.display = !v || g.querySelector('details.cat:not(.off)') ? '' : 'none'; });
+        var chips = panel.querySelector('.chips'); if (chips) chips.style.display = v ? 'none' : '';
+        var note = panel.querySelector('.note'); if (note) note.style.display = v && !panelHit ? 'none' : '';
+        if (!panel.hidden && panelHit) any = true;
+      });
+      empty.hidden = !v || any;
+    });
+    addEventListener('hashchange', function () { q.value = ''; q.dispatchEvent(new Event('input')); });
+  }
+
+  /* lightbox for gallery photos */
+  var zooms = document.querySelectorAll('[data-zoom]');
+  if (zooms.length && window.HTMLDialogElement) {
+    var dlg = document.createElement('dialog'); dlg.className = 'lb'; dlg.setAttribute('aria-label', 'Photo');
+    dlg.innerHTML = '<button type="button" aria-label="Close photo">Close</button><img alt="">';
+    document.body.appendChild(dlg);
+    var im = dlg.querySelector('img');
+    zooms.forEach(function (a) {
+      a.addEventListener('click', function (e) { e.preventDefault(); var src = a.querySelector('img'); im.src = a.getAttribute('href'); im.alt = src ? src.alt : ''; dlg.showModal(); });
+    });
+    dlg.addEventListener('click', function () { dlg.close(); });
   }
 })();
