@@ -594,3 +594,10 @@ h3{line-height:1.05}
 .cred{font-weight:400}
 .k-list h3{font-size:clamp(30px,3vw,44px)}
 .btn,.bar nav,.seg button,.groups button,.chipset button,.tag{font-family:var(--text);font-weight:600}
+
+/* stats band: even padding, tighter number/label pairs, readable digits */
+.stats{padding-block:clamp(56px,6.5vw,96px);gap:clamp(24px,4vw,64px);align-items:start}
+.stat{gap:6px}
+.stat .num{font-size:clamp(72px,9vw,128px);line-height:.95;letter-spacing:0;font-variant-numeric:lining-nums;margin:0}
+.stat p:last-child{font-size:clamp(16px,1.3vw,19px);line-height:1.4;max-width:none;text-wrap:balance;color:#F0DDEE}
+@media(max-width:760px){.stats{grid-template-columns:1fr;gap:28px;padding-block:48px}.stat .num{font-size:72px}.stat p:last-child{font-size:16px}}
