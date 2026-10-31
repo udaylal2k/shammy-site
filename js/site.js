@@ -12,8 +12,9 @@ document.documentElement.classList.add('js');
   });
 
   /* optical kerning: Bodoni's W/F/T/V/Y/P leave a hole before a lowercase letter, so pull it in */
-  var kernSel = 'h1,h2,h3,.brands p.big span,.quote p:not(.by),.marquee span,.cred li,.note p,.related a,.q-empty';
+  var kernSel = 'h1,h2,h3,.quote p:not(.by),.marquee span,.cred li,.note p,.related a,.q-empty';
   document.querySelectorAll(kernSel).forEach(function (root) {
+    if (!root.hasAttribute('aria-label')) root.setAttribute('aria-label', root.textContent.replace(/\s+/g, ' ').trim());
     var tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [], n;
     while ((n = tw.nextNode())) nodes.push(n);
     nodes.forEach(function (node) {
