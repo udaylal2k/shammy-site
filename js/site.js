@@ -24,6 +24,13 @@ document.documentElement.classList.add('js');
   };
   onScroll(); addEventListener('scroll', onScroll, { passive: true });
 
+  /* mobile menu */
+  var tg = document.querySelector('.nav-toggle');
+  if (tg && bar) {
+    tg.addEventListener('click', function () { var o = bar.classList.toggle('open'); tg.setAttribute('aria-expanded', o); tg.textContent = o ? 'Close' : 'Browse'; document.body.style.overflow = o ? 'hidden' : ''; });
+    bar.querySelectorAll('nav a').forEach(function (a) { a.addEventListener('click', function () { bar.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); tg.textContent = 'Browse'; document.body.style.overflow = ''; }); });
+  }
+
   /* reveal on enter */
   var targets = document.querySelectorAll('.rv, .wipe, [data-split]');
   if ('IntersectionObserver' in window && !reduce) {
