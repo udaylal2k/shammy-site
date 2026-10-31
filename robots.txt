@@ -1,12 +1,3 @@
-# Shaamys Lounge Salon - Robots.txt
 User-agent: *
 Allow: /
-
-# Sitemap
-Sitemap: https://shaamys-lounge-salon-davangere-leading-luxury-y9kj3a7xnr.openbot.site/sitemap.xml
-
-# Disallow admin and private paths
-Disallow: /admin/
-Disallow: /private/
-Disallow: /*.json$
-Disallow: /*.xml$
+Sitemap: https://udaylal2k.github.io/shammy-site/sitemap.xml
