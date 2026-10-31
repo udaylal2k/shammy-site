@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Book your appointment at Shaamys Lounge Salon, Davangere. Hair, skin, bridal & grooming services. Online booking with instant confirmation. Call +91 99999 99999.">
+  <meta name="keywords" content="book salon appointment Davangere, online booking salon Davangere, hair appointment Davangere, bridal trial booking Davangere">
+  <meta property="og:title" content="Book Appointment — Shaamys Lounge Salon Davangere">
+  <meta property="og:description" content="Book your appointment at Shaamys Lounge Salon. Hair, skin, bridal & grooming services. Online booking with instant confirmation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://shaamyslounge.openbot.site/book.html">
+  <meta property="og:image" content="https://shaamyslounge.openbot.site/images/hero-roopa.webp">
+  <title>Book Appointment — Shaamys Lounge Salon Davangere</title>
+  <link rel="canonical" href="https://shaamyslounge.openbot.site/book.html">
+  <link rel="preload" as="style" href="../css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <style>
+    .service-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: var(--space-md);
+      background: var(--color-white);
+      border: 2px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-family: inherit;
+      font-size: var(--size-base);
+      font-weight: 500;
+      color: var(--color-ink);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .service-btn:hover, .service-btn:focus {
+      border-color: var(--color-accent);
+      background: var(--color-accent-light);
+    }
+    .service-btn.active {
+      border-color: var(--color-accent);
+      background: var(--color-accent-light);
+      box-shadow: var(--shadow-sm);
+    }
+    .service-btn .service-name { font-weight: 600; display: block; margin-bottom: var(--space-xs); }
+    .service-btn .service-desc { font-size: var(--size-sm); color: var(--color-ink-light); display: block; }
+    .service-btn .service-price { font-weight: 700; color: var(--color-accent); display: block; margin-top: var(--space-xs); }
+
+    .form-group { margin-bottom: var(--space-lg); }
+    .form-group label { display: block; font-weight: 500; margin-bottom: var(--space-xs); color: var(--color-ink); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.875rem 1rem; font-family: inherit; font-size: var(--size-base);
+      border: 2px solid var(--color-border); border-radius: var(--radius-md);
+      background: var(--color-white); color: var(--color-ink);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px var(--color-accent-light);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: var(--color-ink-light); }
+    .form-row { display: grid; grid-template-columns: 1fr; gap: var(--space-md); }
+    .form-check { display: flex; align-items: flex-start; gap: var(--space-sm); }
+    .form-check input { width: auto; margin-top: 0.25rem; accent-color: var(--color-accent); }
+    .form-check label { font-weight: 400; font-size: var(--size-sm); }
+    .selected-service-display { background: var(--color-accent-light); border: 2px solid var(--color-accent); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-lg); display: none; }
+    .selected-service-display.show { display: block; }
+    .selected-service-display strong { color: var(--color-accent); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Book Appointment",
+    "description": "Book your appointment at Shaamys Lounge Salon. Hair, skin, bridal & grooming services.",
+    "mainEntity": {
+      "@type": "Service",
+      "name": "Appointment Booking",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "Shaamys Lounge Salon",
+        "telephone": "+91-99999-99999",
+        "url": "https://shaamyslounge.openbot.site/book.html"
+      }
+    }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="header" role="banner">
+    <div class="container header-inner">
+      <a href="../index.html" class="logo" aria-label="Shaamys Lounge Salon — Home">
+        <span class="logo-text">Shaamys Lounge</span>
+      </a>
+      <nav class="nav" role="navigation" aria-label="Main navigation">
+        <a href="../index.html" class="nav-link">Home</a>
+        <a href="services/hair.html" class="nav-link">Hair</a>
+        <a href="services/skin.html" class="nav-link">Skin</a>
+        <a href="services/bridal.html" class="nav-link">Bridal</a>
+        <a href="../gallery.html" class="nav-link">Gallery</a>
+        <a href="../about.html" class="nav-link">About</a>
+        <a href="book.html" class="nav-link nav-cta" aria-current="page">Book Now</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+    <section class="hero" aria-labelledby="hero-title" style="min-height: 60vh;">
+      <div class="hero-media">
+        <picture>
+          <source srcset="../images/hero-roopa.webp" type="image/webp">
+          <img src="../images/hero-roopa.jpg" alt="Booking at Shaamys Lounge Salon" width="1200" height="1000" loading="eager" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="hero-content">
+        <h1 id="hero-title" class="hero-title">Book Your Appointment</h1>
+        <p class="hero-subtitle">Choose your service, pick a time, and we'll confirm within 15 minutes. Or call <a href="tel:+919999999999" style="color: inherit; text-decoration: underline;">+91 99999 99999</a>.</p>
+      </div>
+    </section>
+
+    <section class="intro" aria-labelledby="booking-title">
+      <div class="container">
+        <div class="selected-service-display" id="selected-service-display" role="status" aria-live="polite">
+          <strong>Selected:</strong> <span id="selected-service-name"></span> — <span id="selected-service-price"></span>
+        </div>
+
+        <h2 id="booking-title" class="section-title" style="text-align: left; margin-bottom: var(--space-lg);">Select Your Service</h2>
+
+        <div id="service-selector" role="group" aria-label="Service categories">
+          <div class="service-category" data-category="hair">
+            <h3 style="font-family: var(--font-display); font-size: var(--size-xl); margin-bottom: var(--space-md); color: var(--color-ink);">Hair Services</h3>
+            <div class="service-btn-group">
+              <button type="button" class="service-btn" data-service="haircut" data-price="₹800" data-duration="45 min">
+                <span class="service-name">Precision Haircut</span>
+                <span class="service-desc">Customized cut, wash & styling with face-shape analysis</span>
+                <span class="service-price">₹800 • 45 min</span>
+              </button>
+              <button type="button" class="service-btn" data-service="coloring" data-price="₹2,500+" data-duration="2–3 hrs">
+                <span class="service-name">Hair Coloring</span>
+                <span class="service-desc">Full color, highlights, balayage, ombre — L'Oréal Professional</span>
+                <span class="service-price">₹2,500+ • 2–3 hrs</span>
+              </button>
+              <button type="button" class="service-btn" data-service="keratin" data-price="₹4,500+" data-duration="3 hrs">
+                <span class="service-name">Keratin Treatment</span>
+                <span class="service-desc">Frizz-free, shiny hair up to 4 months — formaldehyde-free</span>
+                <span class="service-price">₹4,500+ • 3 hrs</span>
+              </button>
+              <button type="button" class="service-btn" data-service="bridal-hair" data-price="₹3,500" data-duration="2 hrs">
+                <span class="service-name">Bridal Hair Styling</span>
+                <span class="service-desc">Custom updo/braids with trial session & touch-up kit</span>
+                <span class="service-price">₹3,500 • 2 hrs</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="service-category" data-category="skin">
+            <h3 style="font-family: var(--font-display); font-size: var(--size-xl); margin: var(--space-xl) 0 var(--space-md); color: var(--color-ink);">Skin Treatments</h3>
+            <div class="service-btn-group">
+              <button type="button" class="service-btn" data-service="facial" data-price="₹1,500" data-duration="60 min">
+                <span class="service-name">Signature Facial</span>
+                <span class="service-desc">Deep cleanse, exfoliation, extraction, mask & massage</span>
+                <span class="service-price">₹1,500 • 60 min</span>
+              </button>
+              <button type="button" class="service-btn" data-service="anti-aging" data-price="₹3,000" data-duration="90 min">
+                <span class="service-name">Anti-Aging Treatment</span>
+                <span class="service-desc">Peptide infusion, microcurrent, LED, collagen mask</span>
+                <span class="service-price">₹3,000 • 90 min</span>
+              </button>
+              <button type="button" class="service-btn" data-service="hydration" data-price="₹2,000" data-duration="60 min">
+                <span class="service-name">Hydration Therapy</span>
+                <span class="service-desc">Hyaluronic acid infusion, oxygen, barrier repair</span>
+                <span class="service-price">₹2,000 • 60 min</span>
+              </button>
+              <button type="button" class="service-btn" data-service="bridal-skin" data-price="₹8,000" data-duration="4 sessions">
+                <span class="service-name">Bridal Skin Prep</span>
+                <span class="service-desc">30-day protocol: facials, peels, hydration for flawless canvas</span>
+                <span class="service-price">₹8,000 • 4 sessions</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="service-category" data-category="bridal">
+            <h3 style="font-family: var(--font-display); font-size: var(--size-xl); margin: var(--space-xl) 0 var(--space-md); color: var(--color-ink);">Bridal Packages</h3>
+            <div class="service-btn-group">
+              <button type="button" class="service-btn" data-service="bridal-trial" data-price="₹2,500" data-duration="2 hrs">
+                <span class="service-name">Bridal Trial Session</span>
+                <span class="service-desc">Full makeup + hair trial, 2 looks, photos & notes (credited to package)</span>
+                <span class="service-price">₹2,500 • 2 hrs</span>
+              </button>
+              <button type="button" class="service-btn" data-service="signature-bridal" data-price="₹15,000" data-duration="4 hrs">
+                <span class="service-name">Signature Bridal Package</span>
+                <span class="service-desc">Makeup + hair + saree draping + touch-up kit + trial session</span>
+                <span class="service-price">₹15,000 • 4 hrs</span>
+              </button>
+              <button type="button" class="service-btn" data-service="premium-bridal" data-price="₹22,000" data-duration="5 hrs">
+                <span class="service-name">Premium Bridal Package</span>
+                <span class="service-desc">Signature + skin prep (2 sessions) + bridal party (2) + emergency kit</span>
+                <span class="service-price">₹22,000 • 5 hrs</span>
+              </button>
+              <button type="button" class="service-btn" data-service="royal-bridal" data-price="₹30,000" data-duration="6 hrs">
+                <span class="service-name">Royal Bridal Package</span>
+                <span class="service-desc">Premium + skin prep (4 sessions) + bridal party (4) + venue touch-up (4 hrs)</span>
+                <span class="service-price">₹30,000 • 6 hrs</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <form id="booking-form" class="booking-form" novalidate>
+          <input type="hidden" id="selected-service" name="service" value="">
+          <input type="hidden" name="form_type" value="booking">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name <span aria-hidden="true">*</span></label>
+              <input type="text" id="name" name="name" required autocomplete="name" placeholder="Your full name">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="+91 9XXXX XXXXX" pattern="[+]?[0-9]{10,14}">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" autocomplete="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label for="date">Preferred Date <span aria-hidden="true">*</span></label>
+              <input type="date" id="date" name="date" required min="">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="time">Preferred Time <span aria-hidden="true">*</span></label>
+              <select id="time" name="time" required>
+                <option value="">Select time</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="10:30">10:30 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="11:30">11:30 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="12:30">12:30 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="13:30">1:30 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="14:30">2:30 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="15:30">3:30 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="16:30">4:30 PM</option>
+                <option value="17:00">5:00 PM</option>
+                <option value="17:30">5:30 PM</option>
+                <option value="18:00">6:00 PM</option>
+                <option value="18:30">6:30 PM</option>
+                <option value="19:00">7:00 PM</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="duration">Estimated Duration</label>
+              <select id="duration" name="duration" disabled>
+                <option value="">Select a service first</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Notes / Special Requests</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="Any allergies, specific look references, bridal party details, etc."></textarea>
+          </div>
+
+          <div class="form-check">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">I agree to be contacted by Shaamys Lounge Salon for booking confirmation and updates via phone/WhatsApp/email.</label>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-large" style="width: 100%; margin-top: var(--space-md);">Submit Booking Request</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta" aria-labelledby="cta-title" style="background: var(--color-white);">
+      <div class="container">
+        <h2 id="cta-title" class="section-title">Prefer to Call?</h2>
+        <p class="cta-text">We're happy to help you choose the perfect service and time.</p>
+        <a href="tel:+919999999999" class="btn btn-primary btn-large" style="display: inline-flex; align-items: center; gap: var(--space-sm);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          Call +91 99999 99999
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3 class="footer-logo">Shaamys Lounge</h3>
+          <p>Davangere's leading luxury unisex salon for hair, skin & bridal makeup.</p>
+          <p class="footer-tagline">Beauty is confidence, care & craft.</p>
+        </div>
+        <div class="footer-contact">
+          <h4>Visit Us</h4>
+          <address>
+            Shaamys Lounge Salon<br>
+            Davangere, Karnataka 577001<br>
+            <a href="tel:+919999999999">+91 99999 99999</a><br>
+            <a href="mailto:hello@shaamyslounge.com">hello@shaamyslounge.com</a>
+          </address>
+        </div>
+        <div class="footer-hours">
+          <h4>Hours</h4>
+          <p>Mon–Sat: 10:00 AM – 8:00 PM</p>
+          <p>Sunday: 11:00 AM – 6:00 PM</p>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram">Instagram</a>
+            <a href="#" aria-label="Facebook">Facebook</a>
+            <a href="#" aria-label="WhatsApp">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="current-year"></span> Shaamys Lounge Salon. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+  <script>
+    // Service selector logic
+    const serviceButtons = document.querySelectorAll('.service-btn');
+    const hiddenInput = document.getElementById('selected-service');
+    const display = document.getElementById('selected-service-display');
+    const displayName = document.getElementById('selected-service-name');
+    const displayPrice = document.getElementById('selected-service-price');
+    const durationSelect = document.getElementById('duration');
+
+    serviceButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        serviceButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        const service = btn.dataset.service;
+        const price = btn.dataset.price;
+        const duration = btn.dataset.duration;
+        const name = btn.querySelector('.service-name').textContent;
+        
+        hiddenInput.value = service;
+        displayName.textContent = name;
+        displayPrice.textContent = `${price} • ${duration}`;
+        display.classList.add('show');
+        
+        durationSelect.disabled = false;
+        durationSelect.innerHTML = `<option value="">Select time</option>`;
+        // Could populate duration based on service, but keeping simple
+      });
+    });
+
+    // Set min date to today
+    const dateInput = document.getElementById('date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+
+    // Form submission handling
+    const form = document.getElementById('booking-form');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (!hiddenInput.value) {
+        alert('Please select a service first.');
+        return;
+      }
+      
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Booking...';
+      submitBtn.disabled = true;
+      
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+      
+      try {
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(data).toString()
+        });
+        
+        if (response.ok) {
+          showToast('Booking request sent! We\'ll confirm within 15 minutes via call/WhatsApp.', 'success');
+          form.reset();
+          hiddenInput.value = '';
+          display.classList.remove('show');
+          serviceButtons.forEach(b => b.classList.remove('active'));
+          durationSelect.disabled = true;
+          durationSelect.innerHTML = '<option value="">Select a service first</option>';
+        } else {
+          throw new Error('Booking failed');
+        }
+      } catch (error) {
+        showToast('Something went wrong. Please call us directly at +91 99999 99999.', 'error');
+      } finally {
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    });
+
+    // Toast notification
+    function showToast(message, type = 'info') {
+      const existing = document.querySelector('.toast');
+      if (existing) existing.remove();
+      
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+        padding: 1rem 1.5rem; border-radius: 8px;
+        background: ${type === 'success' ? '#2e7d32' : type === 'error' ? '#c62828' : '#1a1a1a'};
+        color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        animation: slideIn 0.3s ease; max-width: 90vw;
+      `;
+      
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease forwards';
+        setTimeout(() => toast.remove(), 300);
+      }, 5000);
+    }
+  </script>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
