@@ -530,3 +530,41 @@ h1,h2,h3,.brand,.marquee span,.stat .num,.brands p.big,.cred,.note p,.quote p{fo
 .form .when{margin-bottom:.2em}
 .form .btn.send{margin-top:1.8em}
 @media(max-width:760px){.seg button{min-height:52px}.groups button{flex:1 1 40%;justify-content:center}.chipset button{min-height:44px}}
+
+
+/* =====================================================================
+   v5: cleaner premium type (Cormorant Garamond + Manrope), calmer rows
+   ===================================================================== */
+:root{--display:"Cormorant Garamond","Cormorant",Georgia,serif;--text:"Manrope",system-ui,sans-serif}
+body{font-size:17px;line-height:1.7;font-weight:400}
+h1,h2,h3,.brand,.marquee span,.stat .num,.cred,.note p,.quote p,.related ul,.hero .nm,.hero .role,.hero .plate b{font-family:var(--display);font-weight:600;font-variation-settings:normal;font-optical-sizing:auto;letter-spacing:-.01em}
+h1,h2,h3{line-height:1.02}
+.hero .nm{font-weight:600;letter-spacing:-.02em;font-size:clamp(60px,9.4vw,140px)}
+.hero .role{font-weight:500;font-size:clamp(24px,2.7vw,42px)}
+.k{margin-right:0}
+.lead{font-size:clamp(17px,1.35vw,20px);line-height:1.7}
+.btn,.bar nav,.chipset button,.tag,.seg button{font-family:var(--text);letter-spacing:.01em}
+.bar nav{font-size:14.5px;font-weight:500}
+.panel h2,.menu-group>h2{font-weight:600}
+.quote p,.stat .num,.marquee span{font-weight:500}
+
+/* what we are known for: one clean, full-width row each */
+.sig .top{grid-template-columns:6fr 6fr;align-items:center}
+.sig li a{grid-template-columns:5fr 5fr 2fr;align-items:center;gap:clamp(16px,4vw,64px);padding:clamp(24px,3vw,40px) 0}
+.sig li h3{font-size:clamp(30px,3.2vw,50px);line-height:1.05}
+.sig li p{font-size:clamp(16px,1.3vw,18px);line-height:1.65;max-width:30em;align-self:center;color:inherit}
+.sig li a::after{content:"View  \2192";justify-self:end;font:600 15px var(--text);color:var(--plum);transition:transform .4s var(--ease),color .3s}
+.sig li:hover a::after{color:var(--gold);transform:translateX(6px)}
+.sig li:nth-child(odd) a{padding-inline:var(--m)}
+.sig li:nth-child(even) a{padding-inline:0}
+.sig li:nth-child(even) a::after{right:auto}
+@media(max-width:900px){
+  .sig .top{grid-template-columns:1fr}
+  .sig li a{grid-template-columns:1fr;gap:10px;padding-right:44px;position:relative}
+  .sig li a::after{content:"\2192";position:absolute;right:var(--m);top:50%;translate:0 -50%;font-size:26px}
+  .sig li:nth-child(even) a::after{right:0}
+  .sig li:nth-child(even) a{padding-right:44px}
+}
+.cat li,.details,.cred{font-family:var(--text)}
+.cred{font:600 clamp(22px,2.2vw,32px)/1.3 var(--display);}
+.stat p{font-size:clamp(15px,1.2vw,17px)}
