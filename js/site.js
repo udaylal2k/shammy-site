@@ -129,19 +129,82 @@ document.documentElement.classList.add('js');
     addEventListener('hashchange', show); show();
   }
 
-  /* booking: builds a WhatsApp message from the visitor's choices */
+  /* booking: search-first, then browse by type; builds a WhatsApp message from the picks */
   var form = document.getElementById('book-form');
   if (form) {
     var data = JSON.parse(document.getElementById('menu-json').textContent);
-    var sel = form.querySelector('select'), btns = form.querySelectorAll('[data-for]'), link = form.querySelector('.send'), name = form.querySelector('input');
-    var who = 'women';
-    var fill = function () { sel.innerHTML = '<option value="">Choose a service</option>' + data[who].map(function (s) { return '<option>' + s + '</option>'; }).join(''); };
-    var upd = function () {
-      var m = 'Hello Shaamy Lounge, I would like to book' + (sel.value ? ' ' + sel.value : ' an appointment') + ' (' + (who === 'women' ? "women's" : "men's") + ' menu).' + (name.value ? ' Name: ' + name.value + '.' : '') + ' Please share available times.';
+    var $ = function (id) { return document.getElementById(id); };
+    var svcQ = $('svc-q'), res = $('svc-res'), groupsEl = $('groups'), browse = $('browse'), pickedEl = $('picked');
+    var nm = $('nm'), note = $('note'), link = form.querySelector('.send');
+    var who = 'women', when = 'As soon as possible', openG = -1, picked = [];
+    var flat = function () { var o = []; data[who].forEach(function (g, gi) { g.cats.forEach(function (c) { c.s.forEach(function (s) { o.push({ s: s, c: c.c, g: g.g, gi: gi }); }); }); }); return o; };
+    var key = function (it) { return who + '|' + it.g + '|' + it.c + '|' + it.s; };
+    var has = function (it) { return picked.some(function (p) { return key(p) === key(it); }); };
+    var esc = function (t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+    var toggle = function (it) { if (has(it)) picked = picked.filter(function (p) { return key(p) !== key(it); }); else picked.push({ s: it.s, c: it.c, g: it.g, who: who }); draw(); };
+    var msg = function () {
+      var list = picked.length ? picked.map(function (p) { return p.s + ' (' + (p.who === 'women' ? "women's" : "men's") + ' ' + p.g.toLowerCase() + ')'; }).join(', ') : 'an appointment, and I would like your advice on what suits me';
+      var m = 'Hello Shaamy Lounge, I would like to book ' + list + '. Preferred time: ' + when + '.' + (nm.value.trim() ? ' Name: ' + nm.value.trim() + '.' : '') + (note.value.trim() ? ' Note: ' + note.value.trim() + '.' : '') + ' Please share available slots.';
       link.href = 'https://wa.me/919538316195?text=' + encodeURIComponent(m);
     };
-    btns.forEach(function (b) { b.addEventListener('click', function () { who = b.dataset.for; btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); fill(); upd(); }); });
-    sel.addEventListener('change', upd); name.addEventListener('input', upd); fill(); upd();
+    var drawGroups = function () {
+      groupsEl.innerHTML = data[who].map(function (g, i) { return '<button type="button" data-g="' + i + '" aria-pressed="' + (i === openG) + '">' + esc(g.g) + '</button>'; }).join('');
+    };
+    var drawBrowse = function () {
+      if (openG < 0) { browse.hidden = true; browse.innerHTML = ''; return; }
+      var g = data[who][openG];
+      browse.hidden = false;
+      browse.innerHTML = g.cats.map(function (c) {
+        return '<p class="bc">' + esc(c.c) + '</p><div class="chipset">' + c.s.map(function (s, i) {
+          var it = { s: s, c: c.c, g: g.g };
+          return '<button type="button" data-c="' + esc(c.c) + '" data-i="' + i + '" aria-pressed="' + has(it) + '">' + esc(s) + '</button>';
+        }).join('') + '</div>';
+      }).join('');
+    };
+    var drawPicked = function () {
+      pickedEl.innerHTML = picked.length
+        ? picked.map(function (p, i) { return '<button type="button" class="tag" data-x="' + i + '" aria-label="Remove ' + esc(p.s) + '">' + esc(p.s) + '<span aria-hidden="true">×</span></button>'; }).join('')
+        : '<p class="none">Nothing chosen yet. Not sure what you need? Send as is and Roopa will advise.</p>';
+    };
+    var draw = function () { drawGroups(); drawBrowse(); drawPicked(); msg(); };
+    var results = [];
+    var search = function () {
+      var v = svcQ.value.trim().toLowerCase();
+      if (!v) { res.hidden = true; svcQ.setAttribute('aria-expanded', 'false'); return; }
+      results = flat().filter(function (it) { return (it.s + ' ' + it.c + ' ' + it.g).toLowerCase().indexOf(v) > -1; }).slice(0, 8);
+      res.innerHTML = results.length
+        ? results.map(function (it, i) { return '<li role="option" tabindex="-1" data-r="' + i + '"><b>' + esc(it.s) + '</b><span>' + esc(it.g) + ' · ' + esc(it.c) + '</span></li>'; }).join('')
+        : '<li class="empty">No match. Send us a message and we will help.</li>';
+      res.hidden = false; svcQ.setAttribute('aria-expanded', 'true');
+    };
+    svcQ.addEventListener('input', search);
+    svcQ.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); if (results[0] && !res.hidden) { var it = results[0]; if (!has(it)) toggle(it); svcQ.value = ''; search(); } } if (e.key === 'Escape') { svcQ.value = ''; search(); } });
+    res.addEventListener('click', function (e) {
+      var li = e.target.closest('li[data-r]'); if (!li) return;
+      var it = results[+li.dataset.r]; if (!has(it)) toggle(it); svcQ.value = ''; search(); svcQ.focus();
+    });
+    form.querySelectorAll('[data-for]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        who = b.dataset.for; picked = picked.filter(function (p) { return p.who === who; }); openG = -1; svcQ.value = ''; search();
+        form.querySelectorAll('[data-for]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+        draw();
+      });
+    });
+    form.querySelectorAll('[data-when]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        when = b.dataset.when; form.querySelectorAll('[data-when]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); msg();
+      });
+    });
+    groupsEl.addEventListener('click', function (e) { var b = e.target.closest('button[data-g]'); if (!b) return; var i = +b.dataset.g; openG = openG === i ? -1 : i; drawGroups(); drawBrowse(); });
+    browse.addEventListener('click', function (e) {
+      var b = e.target.closest('button[data-c]'); if (!b) return;
+      var g = data[who][openG], c = g.cats.filter(function (x) { return x.c === b.dataset.c; })[0];
+      toggle({ s: c.s[+b.dataset.i], c: c.c, g: g.g });
+    });
+    pickedEl.addEventListener('click', function (e) { var b = e.target.closest('button[data-x]'); if (!b) return; picked.splice(+b.dataset.x, 1); draw(); });
+    document.addEventListener('click', function (e) { if (!e.target.closest('.pick')) { res.hidden = true; svcQ.setAttribute('aria-expanded', 'false'); } });
+    nm.addEventListener('input', msg); note.addEventListener('input', msg);
+    draw();
   }
 
   /* menu: on phones categories start collapsed (first one open) */
