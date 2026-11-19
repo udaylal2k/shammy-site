@@ -239,6 +239,8 @@ document.documentElement.classList.add('js');
       else if (!d.dataset.init) { d.open = i === 0; d.dataset.init = 1; }
     });
   };
+  /* desktop: categories are always open, so a click on the name must not collapse them */
+  cats.forEach(function (d) { var sm = d.querySelector('summary'); if (sm) sm.addEventListener('click', function (e) { if (!phone.matches) e.preventDefault(); }); });
   if (cats.length) { setOpen(); (phone.addEventListener ? phone.addEventListener('change', function () { cats.forEach(function (d) { delete d.dataset.init; }); setOpen(); }) : 0); }
 
   /* menu: live search across both menus */
