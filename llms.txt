@@ -1,6 +1,6 @@
 # Shaamy Lounge Unisex Salon
 
-> Luxury unisex salon in Davangere, Karnataka, India, founded in 2015 and led by Roopa G.R. (20+ years of experience; trained at L'Oréal Hair Academy, TONI&GUY Singapore, Pivot Point, Kryolan and Thalion France). Services: hair colour, keratin and smoothening, haircuts, facials and skin treatments, bridal and occasion makeup, nails, waxing and men's grooming. Prices are shared on booking.
+> Luxury unisex salon in Davangere, Karnataka, India, founded in 2015 and led by Roopa G.R. (22 years of experience; trained at L'Oréal Hair Academy, TONI&GUY Singapore, Pivot Point, Kryolan and Thalion France). Services: hair colour, keratin and smoothening, haircuts, facials and skin treatments, bridal and occasion makeup, nails, waxing and men's grooming. Prices are shared on booking.
 
 Address: 4th Main Road, 3rd Cross, Above Biba Clothing Store, MCC B Block, Davangere – 577004, Karnataka
 Phone: +91 9538316195, +91 9620716325
@@ -14,3 +14,6 @@ Booking: WhatsApp +91 9538316195
 - [Men's grooming](https://udaylal2k.github.io/shammy-site/mens-grooming-davangere.html): Precision haircuts, beard shaping, colour, hair spa and skin care, from a quick regular cut to a full grooming session, in one of Davangere’s first unisex salons.
 - [Full menu for women and men](https://udaylal2k.github.io/shammy-site/menu.html): every service offered
 - [Our story](https://udaylal2k.github.io/shammy-site/story.html): Roopa G.R.'s background and the salon's history
+
+Instagram: https://www.instagram.com/shaamy_lounge/
+Facebook: https://www.facebook.com/shamyslounge
