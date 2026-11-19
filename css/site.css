@@ -939,3 +939,7 @@ footer.site-foot{padding-top:clamp(44px,5vw,72px)}
 .st-photoband::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,rgba(30,0,32,.62));pointer-events:none}
 .st-photoband p{z-index:1}
 .st-quote blockquote{max-width:26em}
+/* story quote: width must be set on the big text, not the 16px blockquote */
+.st-quote blockquote{max-width:none;margin:0}
+.st-quote p{max-width:19em}
+.st-quote p,.st-big,.academy.ab h2,.st-dream h2{text-wrap:balance}
