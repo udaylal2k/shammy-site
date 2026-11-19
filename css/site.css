@@ -714,3 +714,28 @@ footer.site-foot{padding-top:clamp(52px,6vw,88px)}
   .stats{padding-block:36px}
   .academy,.acad-intro,.programme,.intern,.leave,.owners,.enquire{padding-block:32px}
 }
+
+/* spacing v3: compact rhythm */
+:root{--gap:clamp(28px,3.4vw,48px)}
+.brands{padding-block:clamp(32px,3.8vw,56px)}
+.stats{padding-block:clamp(28px,3.4vw,48px)}
+.quote{padding-block:clamp(32px,3.6vw,52px)}
+.svc-why{padding-block:clamp(28px,3.4vw,48px)}
+.academy,.acad-intro,.programme,.intern,.leave,.owners,.enquire{padding-block:clamp(26px,3.2vw,46px)}
+.menu-group{margin-bottom:clamp(32px,4vw,56px)}
+.page-head{padding-top:calc(var(--m) + 104px);padding-bottom:clamp(28px,3.4vw,52px)}
+.academy .acad-grid,.programme .months,.leave .leave-grid{margin-top:clamp(18px,2.4vw,32px);margin-bottom:clamp(18px,2.4vw,32px)}
+.gallery h2,.brands h2{margin-bottom:clamp(18px,2.4vw,32px)}
+.academy h2,.acad-intro h2,.intern h2,.programme h2,.leave h2,.enquire h2{margin-bottom:.35em}
+.known{gap:clamp(28px,4vw,64px)}
+footer.site-foot{padding-top:clamp(44px,5vw,72px)}
+.site-foot .foot-top{padding-bottom:clamp(26px,3.4vw,44px)}
+.site-foot .foot-cols{padding-block:clamp(26px,3.4vw,44px)}
+@media(max-width:760px){
+  :root{--gap:28px}
+  .stats,.brands,.quote,.svc-why{padding-block:28px}
+  .academy,.acad-intro,.programme,.intern,.leave,.owners,.enquire{padding-block:26px}
+  .page-head{padding-top:calc(var(--m) + 88px);padding-bottom:28px}
+}
+.owners-card{padding:clamp(24px,3.4vw,48px)}
+.acad,.leave-grid>div,.month{padding:clamp(20px,2.4vw,34px)}
