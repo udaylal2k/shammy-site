@@ -8,6 +8,7 @@ Email: roopargujjar@gmail.com
 Booking: WhatsApp +91 9538316195
 
 ## Pages
+- [Academy](https://udaylal2k.github.io/shammy-site/academy.html): 3-month professional certification in hair, skin and makeup with a live salon internship, taught by Roopa G.R. Fees and batch dates are shared on enquiry.
 - [Hair colour, keratin and styling](https://udaylal2k.github.io/shammy-site/hair-colour-keratin-davangere.html): Hand-crafted colour with luminous depth and a soft, graceful grow-out. Smooth, weightless keratin and smoothening with a natural gloss that lasts in any weather.
 - [Facials and skin treatments](https://udaylal2k.github.io/shammy-site/facials-skin-treatments-davangere.html): Restorative facials that strengthen, soothe and leave skin naturally radiant, from a basic clean-up to advanced hydra facials, de-tan and body massage.
 - [Bridal and occasion makeup](https://udaylal2k.github.io/shammy-site/bridal-makeup-davangere.html): Timeless, photo-perfect looks tailored to your features and style, from the trial to the wedding morning, with bridesmaid makeup and hair styling.
@@ -17,3 +18,7 @@ Booking: WhatsApp +91 9538316195
 
 Instagram: https://www.instagram.com/shaamy_lounge/
 Facebook: https://www.facebook.com/shamyslounge
+
+## More
+- [Full facts and bridal FAQ](https://udaylal2k.github.io/shammy-site/llms-full.txt)
+- Opening hours: daily, 9:00 AM to 9:30 PM
