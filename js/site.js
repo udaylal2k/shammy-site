@@ -33,19 +33,23 @@ document.documentElement.classList.add('js');
   });
 
   /* header: solid after scroll, tucks away when scrolling down */
-  var bar = document.querySelector('.bar'), lastY = 0;
-  var onScroll = function () {
+  var bar = document.querySelector('.bar'), lastY = 0, barH = 0, lastOff = -1, scrollTick = false;
+  var doScroll = function () {
+    scrollTick = false;
     var y = window.scrollY;
     if (bar) {
-      bar.classList.toggle('solid', y > 40);
-      bar.classList.toggle('hide', y > 240 && y > lastY + 4);
-      if (y < lastY - 4 || y < 240) bar.classList.remove('hide');
+      var solid = y > 40, hide = y > 240 && y > lastY + 4;
+      if (solid !== bar.classList.contains('solid')) bar.classList.toggle('solid', solid);
+      if (hide !== bar.classList.contains('hide')) bar.classList.toggle('hide', hide);
+      if (!barH) barH = bar.offsetHeight;
     }
-    var off = bar && !bar.classList.contains('hide') && y > 240 ? bar.offsetHeight : 0;
-    document.documentElement.style.setProperty('--bar-offset', off + 'px');
+    var off = bar && !bar.classList.contains('hide') && y > 240 ? barH : 0;
+    if (off !== lastOff) { lastOff = off; document.documentElement.style.setProperty('--bar-offset', off + 'px'); }
     lastY = y;
   };
-  onScroll(); addEventListener('scroll', onScroll, { passive: true });
+  var onScroll = function () { if (!scrollTick) { scrollTick = true; requestAnimationFrame(doScroll); } };
+  addEventListener('resize', function () { barH = 0; }, { passive: true });
+  doScroll(); addEventListener('scroll', onScroll, { passive: true });
 
   /* mobile menu */
   var tg = document.querySelector('.nav-toggle');
@@ -72,7 +76,7 @@ document.documentElement.classList.add('js');
 
   /* parallax drift on marked images */
   var par = [].slice.call(document.querySelectorAll('[data-parallax]'));
-  if (par.length && !reduce) {
+  if (par.length && !reduce && matchMedia('(min-width:901px) and (hover:hover)').matches) {
     var ticking = false;
     var run = function () {
       par.forEach(function (el) {
@@ -269,6 +273,23 @@ document.documentElement.classList.add('js');
       empty.hidden = !v || any;
     });
     addEventListener('hashchange', function () { q.value = ''; q.dispatchEvent(new Event('input')); });
+  }
+
+  /* map: load the Google map only when asked (keeps scrolling smooth and avoids the phone scroll trap) */
+  var mapBox = document.querySelector('.map-box');
+  if (mapBox) {
+    var mapBtn = mapBox.querySelector('.map-load');
+    mapBtn.addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.title = mapBox.dataset.title; f.referrerPolicy = 'no-referrer-when-downgrade'; f.src = mapBox.dataset.src;
+      mapBox.appendChild(f); mapBox.classList.add('loaded'); mapBtn.remove();
+    });
+  }
+
+  /* pause endless animations while they are off screen */
+  if ('IntersectionObserver' in window) {
+    var pio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.target.classList.toggle('paused', !e.isIntersecting); }); }, { rootMargin: '120px' });
+    document.querySelectorAll('.marquee, .academy.ab').forEach(function (el) { pio.observe(el); });
   }
 
   /* lightbox for gallery photos */
