@@ -859,3 +859,13 @@ footer.site-foot{padding-top:clamp(44px,5vw,72px)}
   .panel.men img{max-width:62%}
 }
 @media(max-width:760px){.panel.women img,.panel.men img{height:50%}}
+
+/* ===== home panels, phones: text on top, portrait standing on the bottom edge (no floating) ===== */
+@media(max-width:760px){
+  .panel{height:min(134vw,540px);justify-content:flex-start;padding:30px 24px 0}
+  .panel img{top:auto;bottom:0;right:0;left:auto}
+  .panel.women img,.panel.men img{height:54%;width:auto}
+  .panel.women img{max-width:50%}
+  .panel.men img{max-width:72%}
+  .panel h2{margin-top:0}
+}
