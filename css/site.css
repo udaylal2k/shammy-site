@@ -698,3 +698,19 @@ footer.site-foot::before{content:"";position:absolute;left:var(--m);right:var(--
 @media(max-width:600px){.leave-grid{grid-template-columns:1fr}}
 .acad-intro h2,.intern h2,.programme h2{margin-bottom:.5em}
 .owners-card .btn{margin-top:10px}
+
+/* spacing: tighter rhythm between sections */
+:root{--gap:clamp(40px,5.2vw,76px)}
+.brands{padding-block:clamp(44px,5.5vw,80px)}
+.stats{padding-block:clamp(40px,5vw,68px)}
+.quote{padding-block:clamp(44px,5vw,72px)}
+.svc-why{padding-block:clamp(36px,4.5vw,64px)}
+.academy,.acad-intro,.programme,.intern,.leave,.owners,.enquire{padding-block:clamp(32px,4.4vw,64px)}
+.menu-group{margin-bottom:clamp(40px,5vw,72px)}
+footer.site-foot{padding-top:clamp(52px,6vw,88px)}
+.acad-intro .story{align-items:start}
+@media(max-width:760px){
+  :root{--gap:clamp(36px,9vw,52px)}
+  .stats{padding-block:36px}
+  .academy,.acad-intro,.programme,.intern,.leave,.owners,.enquire{padding-block:32px}
+}
