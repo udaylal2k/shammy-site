@@ -869,3 +869,9 @@ footer.site-foot{padding-top:clamp(44px,5vw,72px)}
   .panel.men img{max-width:72%}
   .panel h2{margin-top:0}
 }
+
+/* phones: shorter Women/Men panels */
+@media(max-width:760px){
+  .panel{height:min(104vw,430px);padding:26px 24px 0}
+  .panel.women img,.panel.men img{height:50%}
+}
